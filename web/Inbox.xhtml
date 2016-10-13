@@ -1,0 +1,81 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:f="http://java.sun.com/jsf/core">
+    
+    <h:head>
+        <title>Inbox</title>
+        <h:outputStylesheet name="styles.css" />
+    </h:head>
+    
+    <h:body>
+        
+        <c:choose>
+            <!-- User is signed in -->
+            <c:when test="#{userBean.signedIn}">
+                <div class="header">
+                    <div class="container">
+                
+                        <div class="logo">LightFacebook</div>
+                            <h:form>
+                                <div class="pull-right">
+                                    <h:commandButton id="sendMessage" value="Send Message" action="SendMessage" />
+                                    <h:commandButton id="profile" value="My Profile" action="Profile"/>
+                                    <h:commandButton id="inbox" value="Inbox" action="Inbox"/>
+                                    <div style="width: 180px; float:right;">
+                                        <h:inputText id="search" value="#{userBean.firstName}" pt:placeholder="Search users">
+                                            <f:ajax event="keyup" render="nameList"/>
+                                        </h:inputText>
+                                        <h:dataTable id="nameList" value="#{userBean.namess}" style="background-color: white; width: 100%;" var="name" border="0">
+                                            <h:column><a href="Profile.xhtml?user=#{name.email}">#{name.firstName}</a></h:column>
+                                        </h:dataTable>
+                                    </div>
+                                    <h:commandButton id="logout" value="Logout" action="#{userBean.logout}"/>
+                                </div>
+                                <div style="clear:both"></div>
+                            </h:form>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    
+                    <!-- Get all messages -->
+                    <ui:repeat value="#{messageBean.getMessages(userBean.email)}" var="msg">
+                        <div class="msg-box">
+                            <table width='100%'>
+                                <tbody class='msg-table'>
+                                    <tr>
+                                        <th align='left' width='100px'>From:</th>
+                                        <td>#{userBean.getUserById(msg.fkUserFrom.id) }</td>
+                                    </tr>
+                                    <tr>
+                                        <th align='left'>Subject:</th>
+                                        <td>#{msg.subject}</td>
+                                    </tr>
+                                    <tr>
+                                        <th align='left'>Content:</th>
+                                        <td>#{msg.content}</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </ui:repeat>
+                  
+                </div>
+
+            </c:when>
+            
+            <!-- User is not signed in -->
+            <c:otherwise>
+                <!-- Redirect to Index -->
+                <meta http-equiv="refresh" content="0; url=index.xhtml" />
+            </c:otherwise>
+        </c:choose>
+
+    </h:body>
+</html>
+

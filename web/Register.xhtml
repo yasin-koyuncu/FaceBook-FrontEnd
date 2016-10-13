@@ -1,0 +1,32 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Index</title>
+        <h:outputStylesheet name="styles.css" />
+    </h:head>
+    <h:body>
+        <div class="header">
+            <div class="container">
+                <div class="logo">LightFacebook</div>
+                <div style="clear:both"></div>
+            </div>
+        </div>
+        <div class="container">
+            <h1> Register</h1>
+            <h:form>
+                <br></br><br></br><br></br><br></br>
+                <table>
+               FirstName:<h:inputText id="in2" value="#{userBean.firstName}" required="true" requiredMessage="Enter FirstName"/><br></br>
+                LastName:<h:inputText value="#{userBean.lastName}" required="true" requiredMessage="Enter Lastname"/><br></br>
+                   Email:<h:inputText value="#{userBean.email}" required="true" requiredMessage="Enter E-mail"/><br></br>
+                Password:<h:inputSecret value="#{userBean.password}" required="true" requiredMessage="Enter Password"/><br></br>
+                <h:commandButton id="knapp" value="Register" action="#{userBean.registration()}"/>
+                </table>
+            </h:form>
+            <!--<meta http-equiv="refresh" content="0; url=index.xhtml" />-->
+        </div>
+    </h:body>
+
+</html>

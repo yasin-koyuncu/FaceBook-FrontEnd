@@ -1,0 +1,87 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Nov 13, 2015, 11:24:38 AM
+    Author     : Yasin Koyuncu
+*/
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background-color: #E9EAED;
+}
+
+.header {
+    width: 100%;
+    background-color: #43609C;
+    padding: 10px 0px;
+    border-bottom: 1px solid #1C326C;
+    height: 28px;
+}
+
+.container {
+    width: 1000px;
+    margin: 0px auto;
+}
+
+.logo {
+    color: #fff;
+    font-family: helvetica, arial, sans-serif;
+    text-shadow: 0 -1px rgba(0, 0, 0, .5);
+    font-size: 23px;
+    font-weight: bold;
+    float: left;
+}
+
+input {
+    border: 1px solid #2F477A;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+textarea:focus, input:focus{
+    outline: 0;
+}
+
+.pull-right {
+    float: right;
+}
+
+.pull-left {
+    float: left;
+}
+
+.msg-box {
+    border: 1px solid #BEBFC1;
+    background-color: #fff;
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 3px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.postBox {
+    width: 100%;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 20px;
+    margin-top: 20px;
+}
+
+#j_idt8 {
+    overflow: hidden;
+    position: relative;
+}
+
+lookedImage{
+    background-position: -110px -98px;
+    width: 16px; /* Set this to icon width. */
+    height: 16px;
+}

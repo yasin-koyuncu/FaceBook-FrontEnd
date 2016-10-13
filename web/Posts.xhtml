@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form> 
+       Subject: <h:inputText id="in" value="#{postBean.content}"/><br/>
+            
+         
+         <h:commandButton id="knapp" value="Post" action="#{postBean.addPost(userBean.email)}"/><br/>
+        
+        
+         <ul>
+        <ui:repeat value="#{postBean.getPosts(userBean.email)}" var="post"> <!--Detta är en loop för att hämta meddelanden -->
+                
+                    <li>
+                        
+                        <h:link value="#{post.content}" >
+                         
+                        </h:link>
+                        
+                        <h:link value="#{post.date}">
+                          
+                        </h:link>
+                        
+                        <h:link value=" #{post.fkUserOwner.id}">
+                          
+                        </h:link>
+                      
+                           
+                    </li>
+                </ui:repeat>
+                    
+            </ul>
+          
+        </h:form>
+    </h:body>
+</html>
+

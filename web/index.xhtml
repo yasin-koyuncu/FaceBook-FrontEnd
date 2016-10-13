@@ -1,0 +1,103 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      
+      xmlns:a="http://xmlns.jcp.org/jsf/passthrough">
+
+    <h:head>
+        
+        
+        <title>Index</title>
+        <h:outputStylesheet name="styles.css" />
+        
+    </h:head>
+    <h:body>
+        <div class="header">
+            <div class="container">
+
+                <div class="logo">LightFacebook</div>
+
+                <c:choose>
+                    <!-- User is signed in -->
+                    <c:when test="#{userBean.signedIn}">
+                        <h:form>
+                            <div class="pull-right">
+
+
+
+                                <h:commandButton id="sendMessage" value="Send Message" action="SendMessage" />
+                                <h:commandButton id="profile" value="My Profile" action="Profile"/>
+                                <h:commandButton id="inbox" value="Inbox" action="Inbox"/>
+                                <div style="width: 180px; float:right;">
+                                    <h:inputText id="search" value="#{userBean.firstName}" pt:placeholder="Search users">
+                                        <f:ajax event="keyup" render="nameList"/>
+                                    </h:inputText>
+                                    <h:dataTable id="nameList" value="#{userBean.namess}" style="background-color: white; width: 100%;" var="name" border="0">
+                                        <h:column><a href="Profile.xhtml?user=#{name.email}">#{name.firstName}</a></h:column>
+                                    </h:dataTable>
+                                </div>
+                                <h:commandButton id="logout" value="Logout" action="#{userBean.logout()}"/>
+                            </div>
+                            <div style="clear:both"></div>
+                        </h:form>
+                    </c:when>
+                    <!-- User is not signed in -->
+                    <c:otherwise>
+
+
+
+                        <h:form class="pull-right">
+                            <!--<label style="opacity: 0;" for="email">Användarnamn</label>-->
+                            <b>Email:</b><h:inputText  id="email" value="#{userBean.email}" a:placeholder="Email"/>
+                            <b>Password:</b><h:inputSecret value="#{userBean.password}"/>
+                            <b>Totp-pass:</b><h:inputText value="#{userBean.otpKey}"/>
+                            <h:commandButton id="knapp" value="Login" action="#{userBean.doLogin()}"/>
+                            <!--<h:commandButton id="knapp2" value="Register" action="Register"/>-->
+                        </h:form>
+
+                        <h:form class="pull-left">
+                            <h:graphicImage value="/Pictest/facebookLogo.png" style=" margin: 150px 0 0 0px;width: 600px;height: 350px; "/>
+                        </h:form>
+
+                        <h:form class="pull-right">
+
+                            <br></br><br></br><br></br><br></br>
+                            <h2>Registration</h2>
+                            <table>
+                                <tr><h:inputText id="in2" value="#{userBean.firstName}"  pt:placeholder="Firstname" required="true" requiredMessage="Enter FirstName" style="margin-left: 4em;" /> <br></br><br></br>
+                                </tr>
+                                <tr><h:inputText value="#{userBean.lastName}" pt:placeholder="Lastname" required="true" requiredMessage="Enter Lastname" style="margin-left: 4em;"/><br></br><br></br>
+                                </tr>
+                                <tr><h:inputText value="#{userBean.email}"  pt:placeholder="Email" required="true" requiredMessage="Enter E-mail" style="margin-left: 4em;"/><br></br><br></br>
+                                </tr>
+
+                                <tr><h:inputSecret value="#{userBean.password}" pt:placeholder="Password" required="true" requiredMessage="Enter Password" style="margin-left: 4em;"/><br></br><br></br>
+                                </tr>
+                                <tr><h:inputSecret value="#{userBean.confirmPassword}" pt:placeholder=" Confirm Password" required="true" requiredMessage="Enter confirm Password" style="margin-left: 4em;"/><br></br><br></br>
+                                </tr>
+                                
+                                <h:commandButton id="knapp" value="Register" action="#{userBean.registration()}" style="margin-left: 4em;"/>
+
+                            </table>
+                        </h:form>
+
+                        <div style="clear:both"></div>
+
+
+                    </c:otherwise>
+                </c:choose>
+
+            </div>
+        </div>
+        <br />
+        
+    </h:body>
+</html>
+
+
+
+

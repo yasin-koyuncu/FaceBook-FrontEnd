@@ -1,0 +1,86 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+      xmlns:pt="http://xmlns.jcp.org/jsf/passthrough">
+    <h:head>
+        <title>New Message</title>
+        <h:outputStylesheet name="styles.css" />
+        <f:metadata>
+            <f:viewParam name="receiver"/>
+        </f:metadata>
+    </h:head>
+    <h:body>
+        
+        <c:choose>
+            <!-- User is signed in -->
+            <c:when test="#{userBean.signedIn}">
+            
+                <div class="header">
+                    <div class="container">
+                
+                        <div class="logo">LightFacebook</div>
+                            <h:form>
+                                <div class="pull-right">
+                                    <h:commandButton id="sendMessage" value="Send Message" action="SendMessage" />
+                                    <h:commandButton id="profile" value="My Profile" action="Profile"/>
+                                    <h:commandButton id="inbox" value="Inbox" action="Inbox"/>
+                                    <div style="width: 180px; float:right;">
+                                        <h:inputText id="search" value="#{userBean.firstName}" pt:placeholder="Search users">
+                                            <f:ajax event="keyup" render="nameList"/>
+                                        </h:inputText>
+                                        <h:dataTable id="nameList" value="#{userBean.namess}" style="background-color: white; width: 100%;" var="name" border="0">
+                                            <h:column><a href="Profile.xhtml?user=#{name.email}">#{name.firstName}</a></h:column>
+                                        </h:dataTable>
+                                    </div>
+                                    <h:commandButton id="logout" value="Logout" action="#{userBean.logout}"/>
+                                </div>
+                                <div style="clear:both"></div>
+                            </h:form>
+                    </div>
+                </div>
+                
+                <div class="container">
+                    <div class="msg-box">
+                        <table width='100%'>
+                            <tbody class='msg-table'>
+                                <h:form>
+                                    <tr>
+                                        <th align='left' width='100px'>To:</th>
+                                        <td><h:inputText value="#{messageBean.to}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th align='left'>Subject:</th>
+                                        <td><h:inputText id="in" value="#{messageBean.subject}"/></td>
+                                    </tr>
+                                    <tr>
+                                        <th align='left'>Content:</th>
+                                        <td>
+                                            <h:inputTextarea value="#{messageBean.content}" />
+                                            <!--<h:inputText value="#{messageBean.content}"/></td>-->
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th align='left'>Action:</th>
+                                        <td><h:commandButton id="button" value="Send Message" action="#{messageBean.sendMessageto(userBean.email)}"/></td>
+                                    </tr>
+                                </h:form>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                
+                
+            </c:when>
+            <!-- User is not signed in -->
+            <c:otherwise>
+                <!-- Redirect to Index -->
+                <meta http-equiv="refresh" content="0; url=index.xhtml" />
+            </c:otherwise>
+        </c:choose>
+
+    </h:body>
+</html>
+
